@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using UFO.ProfileApi;
+using UFO.ProfileApi.DAOs;
 using UFO.ProfileApi.Repositories;
 using UFO.ProfileApi.Repositories.Interfaces;
 using UFO.ProfileApi.Services;
@@ -19,6 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ProfileDbContext>();
+builder.Services.AddScoped<PasswordHasher<UserDAO>>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
