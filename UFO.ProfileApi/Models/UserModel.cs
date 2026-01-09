@@ -18,13 +18,10 @@ public class UserModel
     [Column(name: "email")]
     public string Email { get; set; }
 
-    public UserModel()
-    {
-    }
+    public UserModel() { }
 
-    public UserModel(int id, string username, string password, string email)
+    public UserModel(string username, string password, string email)
     {
-        Id = id;
         Username = username;
         Password = password;
         Email = email;
