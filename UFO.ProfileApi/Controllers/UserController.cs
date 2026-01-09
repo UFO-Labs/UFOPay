@@ -1,15 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using UFO.ProfileApi.DTOs;
+using UFO.ProfileApi.Services.Interfaces;
+using UFO.ProfileApi.Shared.Exceptions;
 
 namespace UFO.ProfileApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class UserController : ControllerBase
+public class UserController(IUserService userService) : ControllerBase
 {
-    [HttpGet]
-    public IActionResult SignUp(UserDTO userDTO)
+    private readonly IUserService _userService = userService;
+
+    /// <summary>
+    /// Create a new user
+    /// </summary>
+    /// <param name="userDTO"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SignUp(UserDTO userDTO)
     {
-        return Ok(new Dictionary<string, string> { { "key", "value" } });
+        if (await _userService.CreateAsync(userDTO))
+        {
+            return Ok(new SuccessResponse(200, "User successfully created"));
+        }
+
+        return BadRequest(new ErrorResponse(400, "Error creating!"));
     }
 }

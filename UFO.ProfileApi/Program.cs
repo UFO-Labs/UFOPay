@@ -1,3 +1,9 @@
+using UFO.ProfileApi;
+using UFO.ProfileApi.Repositories;
+using UFO.ProfileApi.Repositories.Interfaces;
+using UFO.ProfileApi.Services;
+using UFO.ProfileApi.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +17,12 @@ builder.Services.AddRouting(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ProfileDbContext>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

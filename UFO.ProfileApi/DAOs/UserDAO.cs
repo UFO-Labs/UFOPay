@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UFO.ProfileApi.DAOs;
 
-public record UserDAO(string Email);
+public record UserDAO([EmailAddress] string Email);

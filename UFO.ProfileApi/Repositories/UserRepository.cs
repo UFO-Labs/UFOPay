@@ -13,16 +13,17 @@ public class UserRepository(ProfileDbContext context) : IUserRepository
 
     public async Task<bool> CreateAsync(UserDTO userDTO)
     {
-        if (GetAsync(new UserDAO(userDTO.Email)) is null)
+        if (await GetAsync(new UserDAO(userDTO.Email)) is null)
         {
             await _context.Users.AddAsync(
                 new UserModel(userDTO.Username, userDTO.Password, userDTO.Email)
             );
+            await _context.SaveChangesAsync();
 
             return Task.CompletedTask.IsCompletedSuccessfully;
         }
 
-        throw new UserNotFoundException("User not found!");
+        throw new UserException("The user exists!");
     }
 
     public async Task<UserModel> GetAsync(UserDAO userDAO)
@@ -42,7 +43,7 @@ public class UserRepository(ProfileDbContext context) : IUserRepository
             return Task.CompletedTask.IsCompletedSuccessfully;
         }
 
-        throw new UserNotFoundException("User not found!");
+        throw new UserException("User not found!");
     }
 
     public async Task<bool> UpdateAsync(UserDTO userDTO)
@@ -59,6 +60,6 @@ public class UserRepository(ProfileDbContext context) : IUserRepository
             return Task.CompletedTask.IsCompletedSuccessfully;
         }
 
-        throw new UserNotFoundException("User not found!");
+        throw new UserException("User not found!");
     }
 }
