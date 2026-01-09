@@ -1,0 +1,9 @@
+﻿services:
+  ufo.profileapi.database:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: profile
+    ports:
+      - "5001:5432"

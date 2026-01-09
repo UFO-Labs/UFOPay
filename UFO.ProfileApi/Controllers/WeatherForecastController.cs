@@ -4,18 +4,14 @@ namespace UFO.ProfileApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WeatherForecastController : ControllerBase
+public class UsersController(ILogger<UsersController> logger) : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<UsersController> _logger = logger;
 
     [HttpGet]
     public IActionResult Get()
     {
+        _logger.LogInformation("Get Values");
         return Ok(new Dictionary<string, string> { { "key", "value" } });
     }
 }
