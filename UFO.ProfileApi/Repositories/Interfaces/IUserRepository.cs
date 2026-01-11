@@ -7,7 +7,8 @@ namespace UFO.ProfileApi.Repositories.Interfaces;
 public interface IUserRepository
 {
     Task<bool> CreateAsync(UserDTO userDTO);
-    Task<bool> RemoveAsync(UserDAO userDAO);
+    Task<bool> RemoveAsync(UserEmailDAO userDAO);
     Task<bool> UpdateAsync(UserDTO userDTO);
-    Task<UserModel> GetAsync(UserDAO userDAO);
+    Task<UserModel> GetByEmailAsync(UserEmailDAO userDAO);
+    Task<UserModel> GetByUsernameAsync(UserNameDAO userDAO);
 }

@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ProfileDbContext>();
-builder.Services.AddScoped<PasswordHasher<UserDAO>>();
+builder.Services.AddScoped<PasswordHasher<UserNameDAO>>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 

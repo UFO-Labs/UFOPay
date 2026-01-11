@@ -1,3 +1,3 @@
-namespace UFO.ProfileApi.Shared.Exceptions;
+namespace UFO.ProfileApi.Shared;
 
 public record SuccessResponse(int Code, string Message);

@@ -1,4 +1,4 @@
-namespace UFO.ProfileApi.Exceptions;
+namespace UFO.ProfileApi.Shared.Exceptions;
 
 public class UserException : Exception
 {
